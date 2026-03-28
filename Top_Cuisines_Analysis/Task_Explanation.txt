@@ -1,0 +1,130 @@
+================================================================================
+                        TOP CUISINES ANALYSIS — TASK EXPLANATION
+================================================================================
+
+TASK TITLE   : Top Cuisines
+OBJECTIVE    : Identify the top three most common cuisines in the restaurant
+               dataset and calculate what percentage of restaurants serve each.
+
+--------------------------------------------------------------------------------
+SECTION 1 — UNDERSTANDING THE TASK
+--------------------------------------------------------------------------------
+
+The restaurant dataset contains records of thousands of dining establishments
+from across the world. Each restaurant entry includes a "Cuisines" field that
+lists one or more types of cuisine the restaurant serves — for example:
+"North Indian, Chinese" or "Fast Food, Italian".
+
+The task has two clear parts:
+
+  PART A → Find the TOP THREE most frequently occurring cuisines.
+  PART B → Calculate what PERCENTAGE of restaurants serve each of those
+            top three cuisines.
+
+This is a classic frequency analysis problem, commonly performed in business
+intelligence and data analytics to understand market composition.
+
+--------------------------------------------------------------------------------
+SECTION 2 — DATA PREPARATION
+--------------------------------------------------------------------------------
+
+Before performing any analysis, the dataset must be prepared:
+
+  Step 1 — Load the CSV file into a structured DataFrame using pandas.
+
+  Step 2 — Identify and handle missing values. The Cuisines column contained
+            9 null entries (out of 9,551 total records). These 9 rows were
+            excluded from the analysis, leaving 9,542 valid records.
+
+  Step 3 — Handle multi-cuisine entries. A restaurant may serve more than one
+            cuisine type. The Cuisines field stores these as a comma-separated
+            string (e.g., "Japanese, Sushi, Asian"). To count individual
+            cuisines accurately, each entry was split on the comma delimiter
+            and then "exploded" — meaning each cuisine became its own
+            individual row for counting purposes.
+
+  Step 4 — Strip any extra whitespace from cuisine names to ensure consistent
+            matching (e.g., " Chinese" and "Chinese" are treated as the same).
+
+--------------------------------------------------------------------------------
+SECTION 3 — ANALYSIS LOGIC
+--------------------------------------------------------------------------------
+
+Once the data was cleaned and prepared, the frequency of each unique cuisine
+was counted across all restaurant entries (including multiple cuisines per
+restaurant). The cuisines were then ranked in descending order of frequency,
+and the top three were extracted.
+
+Percentage Calculation Formula:
+
+  Percentage = (Number of restaurants serving the cuisine / Total valid
+                restaurant records) × 100
+
+  NOTE: Since one restaurant can serve multiple cuisines, the same restaurant
+  may be counted towards more than one cuisine. As a result, the three
+  percentages will NOT add up to exactly 100%.
+
+--------------------------------------------------------------------------------
+SECTION 4 — RESULTS
+--------------------------------------------------------------------------------
+
+  ┌──────┬──────────────────┬──────────────────────┬─────────────┐
+  │ Rank │ Cuisine          │ Restaurant Count     │ Percentage  │
+  ├──────┼──────────────────┼──────────────────────┼─────────────┤
+  │  1   │ North Indian     │        3,960         │   41.50%    │
+  │  2   │ Chinese          │        2,735         │   28.66%    │
+  │  3   │ Fast Food        │        1,986         │   20.81%    │
+  └──────┴──────────────────┴──────────────────────┴─────────────┘
+
+  Total valid restaurant records used in calculation : 9,542
+  Total unique cuisine types found in the dataset    : 125+
+
+--------------------------------------------------------------------------------
+SECTION 5 — INTERPRETATION OF RESULTS
+--------------------------------------------------------------------------------
+
+  ► NORTH INDIAN (41.50%)
+    North Indian cuisine is the most dominant in the dataset by a significant
+    margin. Appearing in more than 4 out of every 10 restaurants, this cuisine
+    type reflects the strong cultural presence and widespread consumer demand
+    for North Indian food, particularly across South Asian markets.
+
+  ► CHINESE (28.66%)
+    Chinese cuisine holds a firm second position, present in roughly 3 out of
+    every 10 restaurants. Its high prevalence underscores its international
+    appeal and widespread adaptation into local dining cultures globally.
+
+  ► FAST FOOD (20.81%)
+    Fast Food rounds out the top three, appearing in approximately 1 in 5
+    restaurants. This finding is consistent with global trends showing continued
+    growth in quick-service and casual dining segments across urban centres.
+
+--------------------------------------------------------------------------------
+SECTION 6 — VISUALISATIONS PRODUCED
+--------------------------------------------------------------------------------
+
+  1. top_cuisines_bar.png
+     A vertical bar chart showing the absolute count of restaurants for each
+     of the top three cuisines. Each bar is annotated with its count and
+     percentage for quick reference.
+
+  2. top_cuisines_donut.png
+     A donut chart showing the proportional share of each top cuisine. The
+     centre of the donut displays the total number of valid restaurants
+     (9,542), providing immediate context for the percentages shown.
+
+--------------------------------------------------------------------------------
+SECTION 7 — FILES IN THIS PROJECT
+--------------------------------------------------------------------------------
+
+  Top_Cuisines_Analysis.ipynb   → Full step-by-step analysis notebook
+  Dataset___2_.csv              → Source restaurant dataset
+  top_cuisines_results.csv      → Exported results (Rank, Cuisine, Count, %)
+  top_cuisines_bar.png          → Bar chart output
+  top_cuisines_donut.png        → Donut chart output
+  README.md                     → Project documentation
+  Task_Explanation.txt          → This file
+
+--------------------------------------------------------------------------------
+                             END OF DOCUMENT
+--------------------------------------------------------------------------------
